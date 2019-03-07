@@ -17,6 +17,7 @@
 
   <script type="text/javascript">
     var pos = ol.proj.fromLonLat([0,0]);
+    var coordinates = [];
     var map = new ol.Map({
       target: 'map',
       layers: [
@@ -46,11 +47,15 @@
     });
 
     function addMarker(markername, position, content){
+      var coord = ol.proj.fromLonLat(position);
       var marker = new ol.Overlay({
-        position: ol.proj.fromLonLat(position),
+        position: coord,
         element: document.getElementById(markername)
       });
       map.addOverlay(marker);
+      coordinates.push(coord);
+      var extent = ol.extent.boundingExtent(coordinates)
+      map.getView().fit(extent);
 
       CRM.$('#'+markername).click(function (evt) {
         var element = popup.getElement();
