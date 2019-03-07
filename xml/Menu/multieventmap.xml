@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<menu>
+  <item>
+    <path>civicrm/event/map</path>
+    <page_callback>CRM_Multieventmap_Page_MultiEventMap</page_callback>
+    <title>MultiEventMap</title>
+    <access_arguments>access CiviCRM</access_arguments>
+  </item>
+</menu>

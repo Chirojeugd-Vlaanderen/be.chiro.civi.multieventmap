@@ -1,0 +1,28 @@
+.marker {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #088;
+  border-radius: 10px;
+  background-color: #0FF;
+  opacity: 0.5;
+}
+
+.popover-content {
+  min-width: 180px;
+}
+
+.events_no_location {
+  float: right;
+  margin-left: 1em;
+}
+
+#map{
+  flex-basis: 70%;
+  flex-grow: 2;
+  margin-top: 1em;
+}
+
+.flex-container{
+  display: flex;
+  flex-flow: row wrap;
+}
