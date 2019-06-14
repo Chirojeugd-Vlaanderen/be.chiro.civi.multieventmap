@@ -23,8 +23,7 @@ class CRM_Multieventmap_Page_MultiEventMap extends CRM_Core_Page {
     $form->run();
 
     $params = $this->get_params();
-
-    $events = civicrm_api3('event', 'get', $params)['values'];
+    $events = civicrm_api3('Event', 'get', $params)['values'];
 
     $events_no_location = [];
     foreach ($events as $event){
@@ -62,30 +61,30 @@ class CRM_Multieventmap_Page_MultiEventMap extends CRM_Core_Page {
       $params['event_type_id'] = ['IN' => $type_id];
     }
 
+    $campaigns = $this->get('campaign_id');
+    if ($campaigns){
+      $params['campaign_id'] = ['IN' => $campaigns];
+    }
+
     $eventsByDates = $this->get('eventsByDates');
     if ($eventsByDates) {
 
       $from = $this->get('start_date');
+      $to = $this->get('end_date');
+
+
       if (!CRM_Utils_System::isNull($from)) {
-        $params['start_date'] = ['>=' => $from];
+        $params['end_date'] = ['>=' => $from];
       }
 
-      $to = $this->get('end_date');
       if (!CRM_Utils_System::isNull($to)) {
-        $params['end_date'] = ['<=' => $to];
+        $params['start_date'] = ['<=' => $to];
       }
     }
     else {
       $curDate = date('YmdHis');
       $params['end_date'] = ['>=' => $curDate ];
     }
-
-    $campaigns = $this->get('campaign_id');
-    if ($campaigns){
-      $params['campaign_id'] = ['IN' => $campaigns];
-    }
-
-
     return $params;
   }
 
