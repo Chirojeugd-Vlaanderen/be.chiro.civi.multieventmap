@@ -2,14 +2,16 @@
 <div class="flex-container">
   <div id="map" clas="map"></div>
   <div id="popup" title="event location"></div>
-  <div class="events_no_location">
-    <h2>Events without location</h2>
-    <ul>
-      {foreach from=$events_no_location item=event}
-        <li><a href=/civicrm/event/info?id={$event.id}>{$event.title}</a></li>
-      {/foreach}
-    </ul>
-  </div>
+  {if sizeof($events_no_location) > 0}
+    <div class="events_no_location">
+      <h2>Events without location</h2>
+      <ul>
+        {foreach from=$events_no_location item=event}
+          <li><a href=/civicrm/event/info?id={$event.id}>{$event.title}</a></li>
+        {/foreach}
+      </ul>
+    </div>
+  {/if}
 </div>
 
 {literal}
